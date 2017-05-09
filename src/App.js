@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import uuid from 'uuid';
 import Notes from './app/components/Notes';
 
 class App extends Component {
@@ -18,13 +19,28 @@ class App extends Component {
 	  ]
 	  };
   }
+  addNote = () => {
+	   this.setState({
+		 notes: this.state.notes.concat([{
+			 id: uuid.v4(),
+			 task: 'New task'
+		 }])
+	    });
+  }
+  
+   deleteNote = (id, e) => {
+	e.stopPropagation();
+	this.setState({
+		notes: this.state.notes.filter(note => note.id !== id)
+	});
+    }
 
   render() {
     const {notes} = this.state;
     return (
       <div className="App">
-      <button onClick={() => console.log('add note')}>+</button>
-	<Notes notes={notes}/>
+      <button onClick={this.addNote}>+</button>
+	<Notes notes={notes} onDelete={this.deleteNote} />
       </div>
     );
   }
