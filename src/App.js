@@ -61,7 +61,7 @@ class App extends Component {
     const {notes} = this.state;
     return (
       <div className="App">
-      <button onClick={this.addNote}>+</button>
+      <button className="add-note" onClick={this.addNote}>+</button>
         <Notes
 		notes={notes}
 		onNoteClick={this.activateNoteEdit}
